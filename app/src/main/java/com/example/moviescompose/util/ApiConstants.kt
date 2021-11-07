@@ -1,4 +1,4 @@
-package com.example.moviescompose.core.util
+package com.example.moviescompose.util
 
 object ApiConstants {
     const val API_KEY = "cbb0299cdb34a819bc6fbbcd53ba0ed4"

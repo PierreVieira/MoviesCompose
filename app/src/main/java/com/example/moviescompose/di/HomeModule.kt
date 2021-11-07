@@ -1,6 +1,6 @@
 package com.example.moviescompose.di
 
-import com.example.moviescompose.core.util.ApiConstants
+import com.example.moviescompose.util.ApiConstants
 import com.example.moviescompose.features.home.data.remote.MoviesListApi
 import com.example.moviescompose.features.home.data.repository.MoviesListRepositoryImpl
 import com.example.moviescompose.features.home.domain.repository.MoviesListRepository

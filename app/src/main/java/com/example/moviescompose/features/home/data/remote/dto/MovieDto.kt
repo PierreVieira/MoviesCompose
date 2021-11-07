@@ -38,7 +38,7 @@ data class MovieDto(
     fun toMovie() = Movie(
         id = id,
         title = originalTitle,
-        note = (voteAverage * 10).toInt(),
+        score = (voteAverage * 10).toInt(),
         releaseDate = toReleaseDate(releaseDate),
         posterPath = posterPath
     )
