@@ -9,6 +9,9 @@ val Teal200 = Color(0xFF03DAC5)
 
 val Subtitle = Color(0XFF909090)
 val SurfacePlaceholder = Color(0xFFF0F0F0)
+val LoadingImageCard = Color(0xFFF0F0F0)
+val LoadingScoreBallCard = Color(0xFFD3D3D3)
+val LoadingTextCard = Color(0xFFB9B9B9)
 val MoviePlaceholderIcon = Color(0xFF999999)
 
 // Movie Card Circle (score)

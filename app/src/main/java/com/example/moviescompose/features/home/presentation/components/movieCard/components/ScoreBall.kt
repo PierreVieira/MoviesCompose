@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,6 +30,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.moviescompose.R
 import com.example.moviescompose.ui.theme.BackgroundCircle
 import com.example.moviescompose.ui.theme.ScoreHigh
 import com.example.moviescompose.ui.theme.ScoreHighShadow
@@ -38,17 +40,11 @@ import com.example.moviescompose.ui.theme.ScoreMedium
 import com.example.moviescompose.ui.theme.ScoreMediumShadow
 import com.example.moviescompose.ui.theme.SourceSansPro
 
-private fun getColorScore(score: Int) = when {
-    score < 40 -> Pair(ScoreLesser, ScoreLesserShadow)
-    score < 75 -> Pair(ScoreMedium, ScoreMediumShadow)
-    else -> Pair(ScoreHigh, ScoreHighShadow)
-}
-
 @Composable
 fun ScoreBall(
     score: Int,
     modifier: Modifier = Modifier,
-    radius: Dp = 40.dp,
+    radius: Dp = dimensionResource(R.dimen.score_ball_default_radius),
     fontSize: TextUnit = 16.sp,
     borderWidth: Dp = 2.4.dp,
     backGroundColor: Color = BackgroundCircle,
@@ -106,7 +102,7 @@ fun ScoreBall(
 }
 
 @Composable
-fun Border(
+private fun Border(
     radius: Dp,
     colors: Pair<Color, Color>,
     percentage: Float,
@@ -150,6 +146,12 @@ private fun BorderCanvas(
             )
         )
     }
+}
+
+private fun getColorScore(score: Int) = when {
+    score < 40 -> Pair(ScoreLesser, ScoreLesserShadow)
+    score < 75 -> Pair(ScoreMedium, ScoreMediumShadow)
+    else -> Pair(ScoreHigh, ScoreHighShadow)
 }
 
 

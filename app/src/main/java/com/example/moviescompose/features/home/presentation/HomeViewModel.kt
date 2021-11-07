@@ -41,7 +41,7 @@ class HomeViewModel @Inject constructor(
         getAllMovies()
     }
 
-    private fun getAllMovies() {
+    fun getAllMovies() {
         for (type in ListMoviesType.values()) {
             getMovies(type)
         }

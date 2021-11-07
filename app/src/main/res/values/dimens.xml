@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="home_movie_card_width">155dp</dimen>
+    <dimen name="home_movie_card_height">330dp</dimen>
+    <dimen name="home_movie_card_elevation">8dp</dimen>
+    <dimen name="home_movie_card_shadow">4dp</dimen>
+    <dimen name="score_ball_default_radius">40dp</dimen>
+</resources>

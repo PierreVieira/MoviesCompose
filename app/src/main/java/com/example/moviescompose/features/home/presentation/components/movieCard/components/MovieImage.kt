@@ -57,6 +57,7 @@ private fun MovieImagePlaceholder(iconPlaceholderSize: Dp) {
                 painter = painterResource(id = R.drawable.ic_movie),
                 contentDescription = null,
                 tint = MoviePlaceholderIcon,
+
             )
         }
     }

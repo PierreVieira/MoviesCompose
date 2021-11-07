@@ -8,25 +8,30 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintLayoutScope
 import androidx.constraintlayout.compose.Dimension
+import com.example.moviescompose.R
 import com.example.moviescompose.features.home.domain.model.Movie
 import com.example.moviescompose.features.home.domain.model.ReleaseDate
 import com.example.moviescompose.features.home.presentation.components.movieCard.components.MovieCardText
 import com.example.moviescompose.features.home.presentation.components.movieCard.components.MovieImage
 import com.example.moviescompose.features.home.presentation.components.movieCard.components.ScoreBall
+import com.example.moviescompose.features.home.presentation.components.movieCard.content.MovieCardNormalContent
+import com.example.moviescompose.features.home.presentation.components.movieCard.content.MovieCardShimmerContent
 
 @ExperimentalMaterialApi
 @Composable
 fun MovieCard(
-    movie: Movie,
+    movie: Movie?,
     modifier: Modifier = Modifier,
-    width: Dp = 155.dp,
-    height: Dp = 330.dp,
+    width: Dp = dimensionResource(R.dimen.home_movie_card_width),
+    height: Dp = dimensionResource(R.dimen.home_movie_card_height),
     onClick: () -> Unit
 ) {
     val scoreBallDiameter = 30.dp
@@ -36,50 +41,22 @@ fun MovieCard(
         modifier = modifier
             .height(height)
             .width(width)
-            .shadow(4.dp),
+            .shadow(dimensionResource(R.dimen.home_movie_card_shadow)),
         onClick = onClick,
+        elevation = dimensionResource(R.dimen.home_movie_card_elevation)
     ) {
         ConstraintLayout(modifier = Modifier.fillMaxSize()) {
-            val (movieImage, scoreBall, text) = createRefs()
-            MovieImage(
-                modifier = Modifier.constrainAs(movieImage) {
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    top.linkTo(parent.top)
-                    this@constrainAs.width = Dimension.fillToConstraints
-                    this@constrainAs.height = Dimension.value(imageCardHeight)
-                },
-                imageUrl = movie.imageUrl
-            )
-            ScoreBall(
-                modifier = Modifier.constrainAs(scoreBall) {
-                    start.linkTo(
-                        anchor = parent.start,
-                        margin = startMarginContent
-                    )
-                    top.linkTo(
-                        anchor = movieImage.bottom,
-                        margin = -scoreBallDiameter / 2
-                    )
-                },
-                score = movie.score,
-                radius = scoreBallDiameter,
-                fontSize = 10.sp,
-                borderWidth = 2.dp
-            )
-            MovieCardText(
-                modifier = Modifier.constrainAs(text) {
-                    start.linkTo(
-                        anchor = parent.start,
-                        margin = startMarginContent
-                    )
-                    top.linkTo(
-                        anchor = scoreBall.bottom,
-                        margin = 4.dp
-                    )
-                },
-                movieTitle = movie.title,
-                releaseDate = movie.releaseDate
+            movie?.let {
+                MovieCardNormalContent(
+                    scoreBallDiameter = scoreBallDiameter,
+                    startMarginContent = startMarginContent,
+                    imageCardHeight = imageCardHeight,
+                    movie = it
+                )
+            } ?: MovieCardShimmerContent(
+                scoreBallDiameter = scoreBallDiameter,
+                startMarginContent = startMarginContent,
+                imageCardHeight = imageCardHeight,
             )
         }
     }

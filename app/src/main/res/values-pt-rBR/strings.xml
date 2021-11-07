@@ -2,7 +2,10 @@
 <resources>
     <string name="app_name">Movies Compose</string>
     <string name="most_popular">Mais Populares</string>
-    <string name="top_rated">Mais Votado</string>
+    <string name="top_rated">Mais Votados</string>
     <string name="now_playing">Passando Agora</string>
     <string name="upcoming">Por vir</string>
+    <string name="connection_error">Erro de conexão</string>
+    <string name="reconnect">Reconectar</string>
+    <string name="connection_error_description">Um erro de conexão aconteceu. Verifique sua internet e tente novamente.</string>
 </resources>
