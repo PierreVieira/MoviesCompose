@@ -26,7 +26,7 @@ fun MovieCard(
     movie: Movie,
     modifier: Modifier = Modifier,
     width: Dp = 155.dp,
-    height: Dp = 355.dp,
+    height: Dp = 330.dp,
     onClick: () -> Unit
 ) {
     val scoreBallDiameter = 30.dp
@@ -49,7 +49,7 @@ fun MovieCard(
                     this@constrainAs.width = Dimension.fillToConstraints
                     this@constrainAs.height = Dimension.value(imageCardHeight)
                 },
-                imageUrl = movie.posterPath
+                imageUrl = movie.imageUrl
             )
             ScoreBall(
                 modifier = Modifier.constrainAs(scoreBall) {
@@ -98,7 +98,7 @@ private fun MovieCardPreview() {
             month = 10,
             year = 2021
         ),
-        posterPath = ""
+        imageUrl = ""
     )
     MovieCard(
         movie = movie,

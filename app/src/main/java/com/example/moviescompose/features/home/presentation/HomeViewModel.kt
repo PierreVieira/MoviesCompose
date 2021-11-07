@@ -3,6 +3,8 @@ package com.example.moviescompose.features.home.presentation
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.moviescompose.R
+import com.example.moviescompose.features.home.domain.model.HomeSection
 import com.example.moviescompose.util.NetworkErrorMessages
 import com.example.moviescompose.util.Resource
 import com.example.moviescompose.features.home.domain.model.Movie
@@ -28,14 +30,18 @@ class HomeViewModel @Inject constructor(
         upcomingMoviesListState = mutableStateOf(MoviesListState())
     )
 
-    val homeState = HomeState(
+    private val homeState = HomeState(
         popularMoviesListState = _homeState.popularMoviesListState,
         nowPlayingMoviesListState = _homeState.nowPlayingMoviesListState,
         topRatedMoviesListState = _homeState.topRatedMoviesListState,
         upcomingMoviesListState = _homeState.upcomingMoviesListState
     )
 
-    fun getAllMovies() {
+    init {
+        getAllMovies()
+    }
+
+    private fun getAllMovies() {
         for (type in ListMoviesType.values()) {
             getMovies(type)
         }
@@ -67,4 +73,23 @@ class HomeViewModel @Inject constructor(
         )
         is Resource.Loading -> MoviesListState(isLoading = true)
     }
+
+    fun getSections() = listOf(
+        HomeSection(
+            textId = R.string.most_popular,
+            state = homeState.popularMoviesListState.value
+        ),
+        HomeSection(
+            textId = R.string.top_rated,
+            state = homeState.topRatedMoviesListState.value,
+        ),
+        HomeSection(
+            textId = R.string.now_playing,
+            state = homeState.nowPlayingMoviesListState.value,
+        ),
+        HomeSection(
+            textId = R.string.upcoming,
+            state = homeState.upcomingMoviesListState.value
+        )
+    )
 }

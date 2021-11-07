@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Movies Compose</string>
+    <string name="most_popular">Most Pouplar</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="upcoming">Upcoming</string>
 </resources>

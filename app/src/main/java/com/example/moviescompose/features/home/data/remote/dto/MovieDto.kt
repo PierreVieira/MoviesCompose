@@ -3,44 +3,29 @@ package com.example.moviescompose.features.home.data.remote.dto
 
 import com.example.moviescompose.features.home.domain.model.Movie
 import com.example.moviescompose.features.home.domain.model.ReleaseDate
+import com.example.moviescompose.util.ApiConstants
 import com.google.gson.annotations.SerializedName
 
 data class MovieDto(
-    @SerializedName("adult")
-    val adult: Boolean,
-    @SerializedName("backdrop_path")
-    val backdropPath: String,
-    @SerializedName("genre_ids")
-    val genreIds: List<Int>,
     @SerializedName("id")
     val id: Int,
-    @SerializedName("original_language")
-    val originalLanguage: String,
     @SerializedName("original_title")
     val originalTitle: String,
-    @SerializedName("overview")
-    val overview: String,
-    @SerializedName("popularity")
-    val popularity: Double,
     @SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @SerializedName("release_date")
     val releaseDate: String,
     @SerializedName("title")
     val title: String,
-    @SerializedName("video")
-    val video: Boolean,
     @SerializedName("vote_average")
-    val voteAverage: Double,
-    @SerializedName("vote_count")
-    val voteCount: Int
+    val voteAverage: Float
 ) {
     fun toMovie() = Movie(
         id = id,
         title = originalTitle,
         score = (voteAverage * 10).toInt(),
         releaseDate = toReleaseDate(releaseDate),
-        posterPath = posterPath
+        imageUrl = ApiConstants.IMAGE_BASE_URL + posterPath
     )
 
     private fun toReleaseDate(releaseDate: String): ReleaseDate {

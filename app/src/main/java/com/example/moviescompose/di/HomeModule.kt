@@ -19,7 +19,7 @@ object HomeModule {
     @Provides
     @Singleton
     fun provideMoviesListApi(): MoviesListApi = Retrofit.Builder()
-        .baseUrl(ApiConstants.API_KEY)
+        .baseUrl(ApiConstants.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(MoviesListApi::class.java)

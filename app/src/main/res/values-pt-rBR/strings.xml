@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Movies Compose</string>
+    <string name="most_popular">Mais Populares</string>
+    <string name="top_rated">Mais Votado</string>
+    <string name="now_playing">Passando Agora</string>
+    <string name="upcoming">Por vir</string>
+</resources>

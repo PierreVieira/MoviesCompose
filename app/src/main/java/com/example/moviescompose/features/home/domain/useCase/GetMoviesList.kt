@@ -18,7 +18,9 @@ class GetMoviesList @Inject constructor(
     operator fun invoke(type: ListMoviesType): Flow<Resource<List<Movie>>> = flow {
         try {
             emit(Resource.Loading<List<Movie>>())
-            val movies = repository.getListMoviesByType(type).map { it.toMovie() }
+            val movies = repository.getListMoviesByType(type).results.map { movieDto ->
+                movieDto.toMovie()
+            }
             emit(Resource.Success<List<Movie>>(movies))
         } catch (e: HttpException) {
             emit(Resource.Error<List<Movie>>(e.localizedMessage ?: NetworkErrorMessages.UNEXPECTED))
