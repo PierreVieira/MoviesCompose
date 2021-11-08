@@ -6,9 +6,11 @@ import com.example.moviescompose.features.movieDetails.data.dataSource.MovieDeta
 import com.example.moviescompose.features.movieDetails.data.remote.MovieDetailsApi
 import com.example.moviescompose.features.movieDetails.data.repository.MovieDetailsRepositoryImpl
 import com.example.moviescompose.features.movieDetails.domain.repository.MovieDetailsRepository
+import com.example.moviescompose.features.movieDetails.domain.useCase.AddMovieDetails
 import com.example.moviescompose.features.movieDetails.domain.useCase.GetMovieDetails
 import com.example.moviescompose.features.movieDetails.domain.useCase.GetMovieDetailsFromDatabase
 import com.example.moviescompose.features.movieDetails.domain.useCase.GetMovieDetailsFromWeb
+import com.example.moviescompose.features.movieDetails.domain.useCase.RemoveMovieDetailsFromFavorites
 import com.example.moviescompose.util.ApiConstants
 import dagger.Module
 import dagger.Provides
@@ -72,4 +74,23 @@ object MovieDetailsModule {
         getFromWeb: GetMovieDetailsFromWeb,
         getFromDatabase: GetMovieDetailsFromDatabase
     ): GetMovieDetails = GetMovieDetails(getFromWeb, getFromDatabase)
+
+    @Provides
+    @Singleton
+    fun provideAddMovieDetails(
+        repository: MovieDetailsRepository
+    ): AddMovieDetails = AddMovieDetails(
+        insertMovieDetailsAction = {
+            repository.insertMovieDetailsInDatabase(it)
+        }
+    )
+
+    @Provides
+    @Singleton
+    fun provideRemoveMovieDetailsFromFavorites(repository: MovieDetailsRepository): RemoveMovieDetailsFromFavorites =
+        RemoveMovieDetailsFromFavorites(
+            removeMovieDetailsAction = { movieId ->
+                repository.removeMovieDetailsFromDatabaseById(movieId)
+            }
+        )
 }

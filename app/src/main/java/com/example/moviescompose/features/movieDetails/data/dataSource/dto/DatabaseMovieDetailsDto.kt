@@ -12,24 +12,26 @@ import com.example.moviescompose.util.ToDomain
 @Entity
 data class DatabaseMovieDetailsDto(
     @PrimaryKey val id: Int,
-    val originalTitle: String,
     val posterPath: String?,
     val releaseDate: String,
     val title: String,
-    val voteAverage: Float,
+    val score: Int,
+    val overview: String,
     val backdropPath: String?,
-    val genres: String
+    val genres: String,
+    val favorite: Boolean
 ) : MovieDetailsDto {
 
     override fun toMovieDetails() = MovieDetails(
         id = id,
-        title = originalTitle,
-        score = (voteAverage * 10).toInt(),
+        title = title,
+        score = score,
         releaseDate = ToDomain.toReleaseDate(releaseDate),
+        overview = overview,
         posterUrl = ApiConstants.POSTER_BASE_URL + posterPath,
         backdropUrl = ApiConstants.BACKDROP_BASE_URL + backdropPath,
-        originalTitle = originalTitle,
-        genres = Converters.jsonToList(genres).map { Genre(it) }
+        genres = Converters.jsonToList(genres).map { Genre(it) },
+        favorite = favorite
     )
 
 }

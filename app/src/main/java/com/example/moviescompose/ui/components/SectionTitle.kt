@@ -1,4 +1,4 @@
-package com.example.moviescompose.features.home.presentation.components
+package com.example.moviescompose.ui.components
 
 import androidx.annotation.StringRes
 import androidx.compose.material.Text
@@ -12,7 +12,7 @@ import com.example.moviescompose.R
 import com.example.moviescompose.ui.theme.SourceSansPro
 
 @Composable
-fun SectionHomeTitle(@StringRes textId: Int) {
+fun SectionTitle(@StringRes textId: Int) {
     Text(
         text = stringResource(id = textId),
         style = TextStyle(
@@ -25,6 +25,6 @@ fun SectionHomeTitle(@StringRes textId: Int) {
 
 @Composable
 @Preview(showBackground = true)
-fun SectionHomeTitlePreview() {
-    SectionHomeTitle(textId = R.string.most_popular)
+fun SectionTitlePreview() {
+    SectionTitle(textId = R.string.most_popular)
 }

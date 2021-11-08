@@ -6,4 +6,6 @@ import com.example.moviescompose.features.movieDetails.data.remote.dto.WebMovieD
 interface MovieDetailsRepository {
     suspend fun getMovieDetailsFromWebAction(id: Int): WebMovieDetailsDto
     suspend fun getMovieDetailsFromDatabase(id: Int): DatabaseMovieDetailsDto?
+    suspend fun removeMovieDetailsFromDatabaseById(id: Int)
+    suspend fun insertMovieDetailsInDatabase(movieDetailsDto: DatabaseMovieDetailsDto)
 }

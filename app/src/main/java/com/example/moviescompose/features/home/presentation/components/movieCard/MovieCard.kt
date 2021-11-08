@@ -12,16 +12,10 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.ConstraintLayoutScope
-import androidx.constraintlayout.compose.Dimension
 import com.example.moviescompose.R
 import com.example.moviescompose.features.home.domain.model.Movie
 import com.example.moviescompose.features.home.domain.model.ReleaseDate
-import com.example.moviescompose.features.home.presentation.components.movieCard.components.MovieCardText
-import com.example.moviescompose.features.home.presentation.components.movieCard.components.MovieImage
-import com.example.moviescompose.features.home.presentation.components.movieCard.components.ScoreBall
 import com.example.moviescompose.features.home.presentation.components.movieCard.content.MovieCardNormalContent
 import com.example.moviescompose.features.home.presentation.components.movieCard.content.MovieCardShimmerContent
 

@@ -18,4 +18,10 @@ class MovieDetailsRepositoryImpl @Inject constructor(
     override suspend fun getMovieDetailsFromDatabase(id: Int): DatabaseMovieDetailsDto? =
         dao.getNoteById(id)
 
+    override suspend fun removeMovieDetailsFromDatabaseById(id: Int) =
+        dao.deleteMovieDetails(id)
+
+    override suspend fun insertMovieDetailsInDatabase(movieDetailsDto: DatabaseMovieDetailsDto) =
+        dao.insertMovieDetails(movieDetailsDto)
+
 }

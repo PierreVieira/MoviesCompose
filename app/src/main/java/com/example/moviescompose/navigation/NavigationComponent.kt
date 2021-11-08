@@ -14,5 +14,10 @@ fun NavigationComponent(navController: NavHostController) {
         composable(route = Route.Home.value) {
             HomeScreen(navController = navController)
         }
+        composable(
+            route = Route.Details.value,
+        ) {
+
+        }
     }
 }

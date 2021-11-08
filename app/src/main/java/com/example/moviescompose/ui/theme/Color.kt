@@ -13,6 +13,8 @@ val LoadingImageCard = Color(0xFFF0F0F0)
 val LoadingScoreBallCard = Color(0xFFD3D3D3)
 val LoadingTextCard = Color(0xFFB9B9B9)
 val MoviePlaceholderIcon = Color(0xFF999999)
+val OverviewDescription = Color(0xFF878787)
+val MovieDetailsDateColor = Color(0xFFA4A4A4)
 
 // Movie Card Circle (score)
 val ScoreHigh = Color(0xFF21D07A)

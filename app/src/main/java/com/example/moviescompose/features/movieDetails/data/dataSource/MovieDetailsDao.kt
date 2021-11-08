@@ -20,6 +20,6 @@ interface MovieDetailsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovieDetails(movieDetailsDto: DatabaseMovieDetailsDto)
 
-    @Delete
-    suspend fun deleteMovieDetails(movieDetailsDto: DatabaseMovieDetailsDto)
+    @Query("DELETE FROM databasemoviedetailsdto WHERE id = :movieId")
+    suspend fun deleteMovieDetails(movieId: Int)
 }

@@ -8,4 +8,6 @@
     <string name="connection_error">Erro de conexão</string>
     <string name="reconnect">Reconectar</string>
     <string name="connection_error_description">Um erro de conexão aconteceu. Verifique sua internet e tente novamente.</string>
+    <string name="movie_details">Detalhes do Filme</string>
+    <string name="overview">Sinópse</string>
 </resources>

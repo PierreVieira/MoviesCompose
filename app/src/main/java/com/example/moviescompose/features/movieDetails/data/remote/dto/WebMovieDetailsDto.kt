@@ -18,6 +18,8 @@ data class WebMovieDetailsDto(
     val releaseDate: String,
     @SerializedName("title")
     val title: String,
+    @SerializedName("overview")
+    val overview: String,
     @SerializedName("vote_average")
     val voteAverage: Float,
     @SerializedName("backdrop_path")
@@ -28,11 +30,11 @@ data class WebMovieDetailsDto(
     override fun toMovieDetails() = MovieDetails(
         id = id,
         title = originalTitle,
+        overview = overview,
         score = (voteAverage * 10).toInt(),
         releaseDate = ToDomain.toReleaseDate(releaseDate),
         posterUrl = ApiConstants.POSTER_BASE_URL + posterPath,
         backdropUrl = ApiConstants.BACKDROP_BASE_URL + backdropPath,
-        originalTitle = originalTitle,
         genres = genres.toGenres()
     )
 }

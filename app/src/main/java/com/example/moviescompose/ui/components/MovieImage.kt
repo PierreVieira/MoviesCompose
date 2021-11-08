@@ -1,4 +1,4 @@
-package com.example.moviescompose.features.home.presentation.components.movieCard.components
+package com.example.moviescompose.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box

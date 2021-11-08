@@ -18,7 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.moviescompose.features.home.domain.model.Movie
 import com.example.moviescompose.features.home.presentation.components.HomeAppBar
-import com.example.moviescompose.features.home.presentation.components.SectionHomeTitle
+import com.example.moviescompose.ui.components.SectionTitle
 import com.example.moviescompose.features.home.presentation.components.movieCard.MovieCard
 import com.example.moviescompose.features.home.presentation.states.MoviesListState
 import com.example.moviescompose.ui.components.ScreenWithErrorConnection
@@ -49,7 +49,7 @@ private fun HomeContent(
         ) {
             items(sections) { section ->
                 VerticalSpacer()
-                SectionHomeTitle(textId = section.textId)
+                SectionTitle(textId = section.textId)
                 VerticalSpacer(height = 8.dp)
                 MoviesRowContainer(state = section.state, navController = navController)
             }

@@ -7,4 +7,6 @@
     <string name="connection_error">Connection error</string>
     <string name="reconnect">Reconnect</string>
     <string name="connection_error_description">A connection error has occurred. Please check your internet and try again.</string>
+    <string name="movie_details">Movie Details</string>
+    <string name="overview">Overview</string>
 </resources>

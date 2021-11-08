@@ -9,7 +9,7 @@ import androidx.constraintlayout.compose.ConstraintLayoutScope
 import androidx.constraintlayout.compose.Dimension
 import com.example.moviescompose.features.home.domain.model.Movie
 import com.example.moviescompose.features.home.presentation.components.movieCard.components.MovieCardText
-import com.example.moviescompose.features.home.presentation.components.movieCard.components.MovieImage
+import com.example.moviescompose.ui.components.MovieImage
 import com.example.moviescompose.features.home.presentation.components.movieCard.components.ScoreBall
 
 @Composable
