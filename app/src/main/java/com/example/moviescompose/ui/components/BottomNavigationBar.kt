@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -23,6 +24,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.moviescompose.R
 import com.example.moviescompose.navigation.BottomNavigationItem
 import com.example.moviescompose.ui.theme.SourceSansPro
+import com.example.moviescompose.util.TestTags
 
 @Composable
 fun BottomNavigationBar(
@@ -39,7 +41,10 @@ fun BottomNavigationBar(
     ) {
         items.forEach { item ->
             val selected = item.route == backStackEntry.value?.destination?.route
+            val testTag =
+                if (item.icon == R.drawable.ic_home) TestTags.HOME_ICON else TestTags.FAVORITES_ICON
             BottomNavigationItem(
+                modifier = Modifier.testTag(testTag),
                 selected = selected,
                 selectedContentColor = Color.Yellow,
                 unselectedContentColor = Color.LightGray,

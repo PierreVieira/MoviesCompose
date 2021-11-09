@@ -15,7 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.HiltTestRunner"
+        testInstrumentationRunner "com.example.moviescompose.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary true
         }
@@ -99,6 +99,11 @@ dependencies {
 
     // Shimmer
     implementation "com.valentinilk.shimmer:compose-shimmer:$shimmer_version"
+
+    // Tests
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
 
     // Local unit tests
     testImplementation "androidx.test:core:1.4.0"

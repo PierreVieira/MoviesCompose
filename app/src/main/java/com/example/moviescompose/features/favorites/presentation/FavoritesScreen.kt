@@ -17,6 +17,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -25,6 +26,7 @@ import com.example.moviescompose.R
 import com.example.moviescompose.features.favorites.domain.model.FavoriteMovieModel
 import com.example.moviescompose.navigation.Route
 import com.example.moviescompose.ui.components.MovieImage
+import com.example.moviescompose.util.TestTags
 
 @Composable
 fun FavoritesScreen(
@@ -45,7 +47,7 @@ private fun FavoriteMoviesList(
     favoritesList: List<FavoriteMovieModel>,
     navController: NavController
 ) {
-    LazyColumn {
+    LazyColumn(modifier = Modifier.testTag(TestTags.FAVORITES_SCREEN)) {
         item {
             Spacer(modifier = Modifier.height(16.dp))
         }
@@ -58,6 +60,7 @@ private fun FavoriteMoviesList(
                     .clickable {
                         navController.navigate(Route.Details.getDynamicRoute(it.id))
                     }
+                    .testTag(TestTags.FAVORITE_MOVIE_CARD)
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(modifier = Modifier.width(48.dp)) {
@@ -83,7 +86,8 @@ private fun EmptyFavorites() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .testTag(TestTags.FAVORITES_SCREEN),
         contentAlignment = Alignment.Center
     ) {
         Text(text = stringResource(id = R.string.favorites_empty_message))
@@ -93,7 +97,9 @@ private fun EmptyFavorites() {
 @Composable
 fun Loading() {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .testTag(TestTags.FAVORITES_SCREEN),
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator()

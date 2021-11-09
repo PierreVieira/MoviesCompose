@@ -5,9 +5,11 @@ import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.moviescompose.R
+import com.example.moviescompose.util.TestTags
 
 @Composable
 fun FavoriteIcon(
@@ -16,7 +18,7 @@ fun FavoriteIcon(
     modifier: Modifier = Modifier
 ) {
     IconButton(
-        modifier = modifier,
+        modifier = modifier.testTag(TestTags.FAVORITE_BUTTON),
         onClick = favoriteClick
     ) {
         Icon(

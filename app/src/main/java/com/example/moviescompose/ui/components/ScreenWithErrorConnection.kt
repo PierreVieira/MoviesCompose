@@ -23,12 +23,11 @@ import androidx.compose.ui.unit.sp
 import com.example.moviescompose.R
 
 @Composable
-fun ScreenWithErrorConnection(retryButtonClick: () -> Unit) {
+fun ScreenWithErrorConnection(retryButtonClick: () -> Unit, modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp)
-        ,
+            .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -55,5 +54,5 @@ fun ScreenWithErrorConnection(retryButtonClick: () -> Unit) {
 @Composable
 @Preview(showBackground = true)
 private fun ScreenWithErrorConnectionPreview() {
-    ScreenWithErrorConnection {}
+    ScreenWithErrorConnection({})
 }

@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -23,6 +25,7 @@ import com.example.moviescompose.features.home.presentation.states.MoviesListSta
 import com.example.moviescompose.navigation.Route
 import com.example.moviescompose.ui.components.ScreenWithErrorConnection
 import com.example.moviescompose.ui.components.SectionTitle
+import com.example.moviescompose.util.TestTags
 
 @ExperimentalMaterialApi
 @Composable
@@ -32,7 +35,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.testTag(TestTags.HOME_SCREEN),
         topBar = { HomeAppBar() }
     ) {
         HomeContent(navController, viewModel)
@@ -50,11 +53,15 @@ private fun HomeContent(
         LazyColumn(
             modifier = Modifier.padding(start = 16.dp),
         ) {
-            items(sections) { section ->
+            itemsIndexed(sections) { index, item ->
                 VerticalSpacer()
-                SectionTitle(textId = section.textId)
+                SectionTitle(textId = item.textId)
                 VerticalSpacer(height = 8.dp)
-                MoviesRowContainer(state = section.state, navController = navController)
+                MoviesRowContainer(
+                    state = item.state,
+                    navController = navController,
+                    rowIndex = index
+                )
             }
             item {
                 VerticalSpacer()
@@ -71,11 +78,15 @@ private fun HomeContent(
 
 @ExperimentalMaterialApi
 @Composable
-private fun MoviesRowContainer(state: MoviesListState, navController: NavController) {
+private fun MoviesRowContainer(state: MoviesListState, navController: NavController, rowIndex: Int) {
     if (state.isLoading) {
         LoadingMoviesListRow()
     } else {
-        MoviesListRow(state.movies, navController)
+        MoviesListRow(
+            state.movies,
+            navController,
+            rowIndex
+        )
     }
 }
 
@@ -97,12 +108,14 @@ fun LoadingMoviesListRow() {
 
 @ExperimentalMaterialApi
 @Composable
-fun MoviesListRow(movies: List<Movie>, navController: NavController) {
+fun MoviesListRow(movies: List<Movie>, navController: NavController, rowIndex: Int) {
     LazyRow(modifier = Modifier.fillMaxWidth()) {
-        items(movies) { movie ->
+        itemsIndexed(movies) { index, item ->
             MovieCard(
-                movie = movie,
-                onClick = { navController.navigate(Route.Details.getDynamicRoute(movie.id)) })
+                modifier = Modifier.testTag("${TestTags.HOME_MOVIE_CARD} $rowIndex $index"),
+                movie = item,
+                onClick = { navController.navigate(Route.Details.getDynamicRoute(item.id)) }
+            )
             HorizontalSpacer()
         }
     }

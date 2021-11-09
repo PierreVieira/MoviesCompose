@@ -12,6 +12,7 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -19,6 +20,7 @@ import com.example.moviescompose.features.movieDetails.presentation.components.a
 import com.example.moviescompose.features.movieDetails.presentation.content.MovieDetailsNormalConnection
 import com.example.moviescompose.ui.components.BackAppBar
 import com.example.moviescompose.ui.components.ScreenWithErrorConnection
+import com.example.moviescompose.util.TestTags
 
 @Composable
 fun MovieDetailsScreen(
@@ -56,13 +58,18 @@ private fun MovieDetailsScreenContent(
     openYoutubeLink: (String) -> Unit
 ) {
     if (state.value.error.isNotBlank()) {
-        ScreenWithErrorConnection(retryButtonClick = retryButtonClick)
+        ScreenWithErrorConnection(
+            retryButtonClick = retryButtonClick,
+            modifier = Modifier.testTag(TestTags.MOVIE_DETAILS_SCREEN)
+        )
     } else {
         val screenHeight = LocalConfiguration.current.screenHeightDp.dp
         val movieDetails = state.value.movieDetails
         if (state.value.isLoading) {
             Box(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .testTag(TestTags.MOVIE_DETAILS_SCREEN),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
@@ -72,6 +79,7 @@ private fun MovieDetailsScreenContent(
                 modifier = Modifier
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState())
+                    .testTag(TestTags.MOVIE_DETAILS_SCREEN)
             ) {
                 movieDetails?.let {
                     MovieDetailsNormalConnection(
