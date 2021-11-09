@@ -8,7 +8,9 @@ import com.example.moviescompose.features.movieDetails.data.remote.MovieDetailsA
 import com.example.moviescompose.features.movieDetails.data.repository.MovieDetailsRepositoryImpl
 import com.example.moviescompose.features.movieDetails.domain.repository.MovieDetailsRepository
 import com.example.moviescompose.features.movieDetails.domain.useCase.AddMovieDetails
+import com.example.moviescompose.features.movieDetails.domain.useCase.DetailUseCases
 import com.example.moviescompose.features.movieDetails.domain.useCase.GetMovieDetails
+import com.example.moviescompose.features.movieDetails.domain.useCase.GetMovieVideo
 import com.example.moviescompose.features.movieDetails.domain.useCase.OpenVideoOnYoutube
 import com.example.moviescompose.features.movieDetails.domain.useCase.RemoveMovieDetailsFromFavorites
 import com.example.moviescompose.util.ApiConstants
@@ -53,25 +55,17 @@ object MovieDetailsModule {
 
     @Provides
     @Singleton
-    fun provideAddMovieDetails(
-        repository: MovieDetailsRepository
-    ): AddMovieDetails = AddMovieDetails(
-        insertMovieDetailsAction = {
-            repository.insertMovieDetailsInDatabase(it)
-        }
-    )
-
-    @Provides
-    @Singleton
-    fun provideRemoveMovieDetailsFromFavorites(repository: MovieDetailsRepository): RemoveMovieDetailsFromFavorites =
-        RemoveMovieDetailsFromFavorites(
-            removeMovieDetailsAction = { movieId ->
-                repository.removeMovieDetailsFromDatabaseById(movieId)
-            }
-        )
-
-    @Provides
-    @Singleton
     fun provideOpenYoutubeVideoUseCase(@ApplicationContext context: Context) =
         OpenVideoOnYoutube(context)
+
+    @Provides
+    @Singleton
+    fun provideUseCases(repository: MovieDetailsRepository, openVideoOnYoutube: OpenVideoOnYoutube): DetailUseCases {
+        return DetailUseCases(
+            getMovieDetails = GetMovieDetails(repository, GetMovieVideo(repository)),
+            addMovieDetails = AddMovieDetails(repository),
+            openVideoOnYoutube = openVideoOnYoutube,
+            removeMovieDetailsFromFavorites = RemoveMovieDetailsFromFavorites(repository)
+        )
+    }
 }

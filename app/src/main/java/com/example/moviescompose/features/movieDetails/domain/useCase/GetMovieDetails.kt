@@ -1,18 +1,15 @@
 package com.example.moviescompose.features.movieDetails.domain.useCase
 
 import com.example.moviescompose.features.movieDetails.domain.model.MovieDetails
-import com.example.moviescompose.features.movieDetails.domain.model.MovieVideo
 import com.example.moviescompose.features.movieDetails.domain.repository.MovieDetailsRepository
-import com.example.moviescompose.util.MovieDetailsPreviewData
 import com.example.moviescompose.util.NetworkErrorMessages
 import com.example.moviescompose.util.Resource
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import okio.IOException
 import retrofit2.HttpException
-import javax.inject.Inject
 
-class GetMovieDetails @Inject constructor(
+class GetMovieDetails(
     private val repository: MovieDetailsRepository,
     private val getMovieVideos: GetMovieVideo
 ) {
@@ -31,8 +28,7 @@ class GetMovieDetails @Inject constructor(
             val movieDetails = repository.getMovieDetailsFromWeb(movieId).toMovieDetails()
             val movieVideo = getMovieVideos(movieId)
             emit(Resource.Success(movieDetails.copy(movieVideo = movieVideo)))
-        }
-        catch (e: HttpException) {
+        } catch (e: HttpException) {
             emit(
                 Resource.Error(
                     e.localizedMessage ?: NetworkErrorMessages.UNEXPECTED

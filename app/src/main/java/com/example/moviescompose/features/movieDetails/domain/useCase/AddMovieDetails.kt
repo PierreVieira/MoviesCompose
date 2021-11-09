@@ -1,12 +1,12 @@
 package com.example.moviescompose.features.movieDetails.domain.useCase
 
-import com.example.moviescompose.features.movieDetails.data.dataSource.dto.EntityMovieDetailsDto
 import com.example.moviescompose.features.movieDetails.domain.model.MovieDetails
+import com.example.moviescompose.features.movieDetails.domain.repository.MovieDetailsRepository
 import javax.inject.Inject
 
 class AddMovieDetails @Inject constructor(
-    private val insertMovieDetailsAction: suspend (EntityMovieDetailsDto) -> Unit
+    private val repository: MovieDetailsRepository
 ) {
     suspend operator fun invoke(movieDetails: MovieDetails) =
-        insertMovieDetailsAction(movieDetails.toDatabaseDto())
+        repository.insertMovieDetailsInDatabase(movieDetails.toDatabaseDto())
 }

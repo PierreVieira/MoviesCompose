@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviescompose.features.movieDetails.domain.useCase.AddMovieDetails
+import com.example.moviescompose.features.movieDetails.domain.useCase.DetailUseCases
 import com.example.moviescompose.features.movieDetails.domain.useCase.GetMovieDetails
 import com.example.moviescompose.features.movieDetails.domain.useCase.OpenVideoOnYoutube
 import com.example.moviescompose.features.movieDetails.domain.useCase.RemoveMovieDetailsFromFavorites
@@ -22,10 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailsViewModel @Inject constructor(
-    private val getMovieDetailsUseCase: GetMovieDetails,
-    private val removeMovieDetailsFromFavorites: RemoveMovieDetailsFromFavorites,
-    private val addMovieDetails: AddMovieDetails,
-    private val openVideoOnYoutube: OpenVideoOnYoutube,
+    private val useCases: DetailUseCases,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -44,7 +42,7 @@ class MovieDetailsViewModel @Inject constructor(
 
     fun getMovieDetails() {
         movieId?.let {
-            getMovieDetailsUseCase(it).onEach { result ->
+            useCases.getMovieDetails(it).onEach { result ->
                 _state.value = when (result) {
                     is Resource.Success -> {
                         _favoriteState.value = result.data!!.favorite
@@ -64,14 +62,14 @@ class MovieDetailsViewModel @Inject constructor(
             viewModelScope.launch {
                 _favoriteState.value = !favoriteState.value
                 if (favoriteState.value) {
-                    addMovieDetails(it.copy(favorite = true))
+                    useCases.addMovieDetails(it.copy(favorite = true))
                 } else {
                     _favoriteState.value = false
-                    removeMovieDetailsFromFavorites(it.id)
+                    useCases.removeMovieDetailsFromFavorites(it.id)
                 }
             }
         }
     }
 
-    fun openYoutubeVideo(videoId: String) = openVideoOnYoutube(videoId)
+    fun openYoutubeVideo(videoId: String) = useCases.openVideoOnYoutube(videoId)
 }

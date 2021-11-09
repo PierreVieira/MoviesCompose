@@ -16,8 +16,6 @@ data class WebMovieDetailsDto(
     val posterPath: String?,
     @SerializedName("release_date")
     val releaseDate: String,
-    @SerializedName("title")
-    val title: String,
     @SerializedName("overview")
     val overview: String,
     @SerializedName("vote_average")
