@@ -1,6 +1,6 @@
 package com.example.moviescompose.features.movieDetails.data.remote.dto.videos
 
-import com.example.moviescompose.features.movieDetails.domain.model.Video
+import com.example.moviescompose.features.movieDetails.domain.model.MovieVideo
 import com.google.gson.annotations.SerializedName
 
 data class VideoDto(
@@ -9,8 +9,8 @@ data class VideoDto(
     @SerializedName("key")
     val key: String
 ) {
-    fun toVideo() = Video(
+    fun toVideo() = MovieVideo(
         site = site,
-        key = key
+        id = key
     )
 }

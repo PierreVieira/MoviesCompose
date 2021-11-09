@@ -1,6 +1,7 @@
 package com.example.moviescompose.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.example.moviescompose.features.movieDetails.data.dataSource.MovieDetailsDatabase
 import com.example.moviescompose.features.movieDetails.data.remote.MovieDetailsApi
@@ -8,13 +9,13 @@ import com.example.moviescompose.features.movieDetails.data.repository.MovieDeta
 import com.example.moviescompose.features.movieDetails.domain.repository.MovieDetailsRepository
 import com.example.moviescompose.features.movieDetails.domain.useCase.AddMovieDetails
 import com.example.moviescompose.features.movieDetails.domain.useCase.GetMovieDetails
-import com.example.moviescompose.features.movieDetails.domain.useCase.GetMovieDetailsFromDatabase
-import com.example.moviescompose.features.movieDetails.domain.useCase.GetMovieDetailsFromWeb
+import com.example.moviescompose.features.movieDetails.domain.useCase.OpenVideoOnYoutube
 import com.example.moviescompose.features.movieDetails.domain.useCase.RemoveMovieDetailsFromFavorites
 import com.example.moviescompose.util.ApiConstants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -52,31 +53,6 @@ object MovieDetailsModule {
 
     @Provides
     @Singleton
-    fun provideGetMovieDetailsFromWeb(repository: MovieDetailsRepository) =
-        GetMovieDetailsFromWeb(
-            getMovieDetailsFromWebAction = {
-                repository.getMovieDetailsFromWebAction(it)
-            }
-        )
-
-    @Provides
-    @Singleton
-    fun provideGetMovieDetailsFromDatabase(repository: MovieDetailsRepository) =
-        GetMovieDetailsFromDatabase(
-            getMovieDetailsFromDatabaseAction = {
-                repository.getMovieDetailsFromDatabase(it)
-            }
-        )
-
-    @Provides
-    @Singleton
-    fun provideGetMovieDetails(
-        getFromWeb: GetMovieDetailsFromWeb,
-        getFromDatabase: GetMovieDetailsFromDatabase
-    ): GetMovieDetails = GetMovieDetails(getFromWeb, getFromDatabase)
-
-    @Provides
-    @Singleton
     fun provideAddMovieDetails(
         repository: MovieDetailsRepository
     ): AddMovieDetails = AddMovieDetails(
@@ -93,4 +69,9 @@ object MovieDetailsModule {
                 repository.removeMovieDetailsFromDatabaseById(movieId)
             }
         )
+
+    @Provides
+    @Singleton
+    fun provideOpenYoutubeVideoUseCase(@ApplicationContext context: Context) =
+        OpenVideoOnYoutube(context)
 }

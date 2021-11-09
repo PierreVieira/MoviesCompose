@@ -18,7 +18,7 @@ data class MovieDto(
     @SerializedName("title")
     val title: String,
     @SerializedName("vote_average")
-    val voteAverage: Float
+    val voteAverage: Float,
 ) {
     fun toMovie() = Movie(
         id = id,

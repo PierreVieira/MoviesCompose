@@ -18,18 +18,21 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.moviescompose.features.home.domain.model.Movie
 import com.example.moviescompose.features.home.presentation.components.HomeAppBar
-import com.example.moviescompose.ui.components.SectionTitle
 import com.example.moviescompose.features.home.presentation.components.movieCard.MovieCard
 import com.example.moviescompose.features.home.presentation.states.MoviesListState
+import com.example.moviescompose.navigation.Route
 import com.example.moviescompose.ui.components.ScreenWithErrorConnection
+import com.example.moviescompose.ui.components.SectionTitle
 
 @ExperimentalMaterialApi
 @Composable
 fun HomeScreen(
     navController: NavController,
+    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     Scaffold(
+        modifier = modifier,
         topBar = { HomeAppBar() }
     ) {
         HomeContent(navController, viewModel)
@@ -97,7 +100,9 @@ fun LoadingMoviesListRow() {
 fun MoviesListRow(movies: List<Movie>, navController: NavController) {
     LazyRow(modifier = Modifier.fillMaxWidth()) {
         items(movies) { movie ->
-            MovieCard(movie = movie, onClick = {})
+            MovieCard(
+                movie = movie,
+                onClick = { navController.navigate(Route.Details.getDynamicRoute(movie.id)) })
             HorizontalSpacer()
         }
     }

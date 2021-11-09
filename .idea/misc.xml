@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/pierr/AndroidStudioProjects/MoviesCompose/app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="..\:/Users/pierr/AndroidStudioProjects/MoviesCompose/app/src/main/res/drawable/ic_movie.xml" value="0.10185185185185185" />
+        <entry key="..\:/Users/pierr/AndroidStudioProjects/MoviesCompose/app/src/main/res/drawable/ic_star_border.xml" value="0.27870370370370373" />
         <entry key="..\:/Users/pierr/AndroidStudioProjects/MoviesCompose/app/src/main/res/drawable/tmdb_short_logo.xml" value="0.1" />
       </map>
     </option>

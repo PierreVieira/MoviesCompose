@@ -25,16 +25,12 @@ class HomeViewModel @Inject constructor(
 
     private val _homeState = HomeMutableState(
         popularMoviesListState = mutableStateOf(MoviesListState()),
-        nowPlayingMoviesListState = mutableStateOf(MoviesListState()),
         topRatedMoviesListState = mutableStateOf(MoviesListState()),
-        upcomingMoviesListState = mutableStateOf(MoviesListState())
     )
 
     private val homeState = HomeState(
         popularMoviesListState = _homeState.popularMoviesListState,
-        nowPlayingMoviesListState = _homeState.nowPlayingMoviesListState,
         topRatedMoviesListState = _homeState.topRatedMoviesListState,
-        upcomingMoviesListState = _homeState.upcomingMoviesListState
     )
 
     init {
@@ -56,12 +52,6 @@ class HomeViewModel @Inject constructor(
                 ListMoviesType.TOP_RATED -> {
                     _homeState.topRatedMoviesListState.value = getMoviesListState(result)
                 }
-                ListMoviesType.NOW_PLAYING -> {
-                    _homeState.nowPlayingMoviesListState.value = getMoviesListState(result)
-                }
-                ListMoviesType.UPCOMING -> {
-                    _homeState.upcomingMoviesListState.value = getMoviesListState(result)
-                }
             }
         }.launchIn(viewModelScope)
     }
@@ -82,14 +72,6 @@ class HomeViewModel @Inject constructor(
         HomeSection(
             textId = R.string.top_rated,
             state = homeState.topRatedMoviesListState.value,
-        ),
-        HomeSection(
-            textId = R.string.now_playing,
-            state = homeState.nowPlayingMoviesListState.value,
-        ),
-        HomeSection(
-            textId = R.string.upcoming,
-            state = homeState.upcomingMoviesListState.value
         )
     )
 }

@@ -5,4 +5,5 @@
     <dimen name="home_movie_card_elevation">8dp</dimen>
     <dimen name="home_movie_card_shadow">4dp</dimen>
     <dimen name="score_ball_default_radius">40dp</dimen>
+    <dimen name="bottom_navigation_height">48dp</dimen>
 </resources>

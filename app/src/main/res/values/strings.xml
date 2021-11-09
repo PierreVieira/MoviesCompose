@@ -9,4 +9,11 @@
     <string name="connection_error_description">A connection error has occurred. Please check your internet and try again.</string>
     <string name="movie_details">Movie Details</string>
     <string name="overview">Overview</string>
+    <string name="favorite">Favorite</string>
+    <string name="disfavor">Disfavor</string>
+    <string name="watch_video_on_youtube">Watch video on youtube</string>
+    <string name="trailer">Trailer</string>
+    <string name="home">Home</string>
+    <string name="favorites">Favorites</string>
+    <string name="favorites_empty_message">You still don\'t have any favorite movies :(</string>
 </resources>

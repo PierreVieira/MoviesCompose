@@ -9,5 +9,12 @@
     <string name="reconnect">Reconectar</string>
     <string name="connection_error_description">Um erro de conexão aconteceu. Verifique sua internet e tente novamente.</string>
     <string name="movie_details">Detalhes do Filme</string>
-    <string name="overview">Sinópse</string>
+    <string name="overview">Sinopse</string>
+    <string name="favorite">Favoritar</string>
+    <string name="disfavor">Desfavoritar</string>
+    <string name="watch_video_on_youtube">Assistir vídeo no youtube</string>
+    <string name="trailer">Trailer</string>
+    <string name="home">Home</string>
+    <string name="favorites">Favoritos</string>
+    <string name="favorites_empty_message">Você ainda não tem nenhum filme favorito :(</string>
 </resources>

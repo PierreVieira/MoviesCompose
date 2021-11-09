@@ -4,7 +4,5 @@ import androidx.compose.runtime.MutableState
 
 data class HomeMutableState(
     val popularMoviesListState: MutableState<MoviesListState>,
-    val nowPlayingMoviesListState: MutableState<MoviesListState>,
     val topRatedMoviesListState: MutableState<MoviesListState>,
-    val upcomingMoviesListState: MutableState<MoviesListState>
 )

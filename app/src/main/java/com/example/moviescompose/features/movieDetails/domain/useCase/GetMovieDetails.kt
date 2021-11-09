@@ -1,21 +1,45 @@
 package com.example.moviescompose.features.movieDetails.domain.useCase
 
 import com.example.moviescompose.features.movieDetails.domain.model.MovieDetails
+import com.example.moviescompose.features.movieDetails.domain.model.MovieVideo
+import com.example.moviescompose.features.movieDetails.domain.repository.MovieDetailsRepository
+import com.example.moviescompose.util.MovieDetailsPreviewData
+import com.example.moviescompose.util.NetworkErrorMessages
 import com.example.moviescompose.util.Resource
-import com.example.moviescompose.util.exceptions.NotFoundMovieDetailsException
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
+import okio.IOException
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class GetMovieDetails @Inject constructor(
-    private val getFromWeb: GetMovieDetailsFromWeb,
-    private val getFromDatabase: GetMovieDetailsFromDatabase,
+    private val repository: MovieDetailsRepository,
+    private val getMovieVideos: GetMovieVideo
 ) {
-    operator fun invoke(movieId: Int): Flow<Resource<MovieDetails>> = flow {
+    operator fun invoke(movieId: Int) = flow {
+        emit(Resource.Loading())
+        loadFromDatabase(movieId)?.let {
+            emit(Resource.Success(it))
+        } ?: loadFromWeb(movieId)
+    }
+
+    private suspend fun loadFromDatabase(movieId: Int) =
+        repository.getMovieDetailsFromDatabase(movieId)?.toMovieDetails()
+
+    private suspend fun FlowCollector<Resource<MovieDetails>>.loadFromWeb(movieId: Int) {
         try {
-            getFromDatabase(movieId)
-        } catch (e: NotFoundMovieDetailsException) {
-            getFromWeb(movieId)
+            val movieDetails = repository.getMovieDetailsFromWeb(movieId).toMovieDetails()
+            val movieVideo = getMovieVideos(movieId)
+            emit(Resource.Success(movieDetails.copy(movieVideo = movieVideo)))
+        }
+        catch (e: HttpException) {
+            emit(
+                Resource.Error(
+                    e.localizedMessage ?: NetworkErrorMessages.UNEXPECTED
+                )
+            )
+        } catch (e: IOException) {
+            emit(Resource.Error(NetworkErrorMessages.SERVER))
         }
     }
 }

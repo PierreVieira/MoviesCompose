@@ -6,5 +6,7 @@ data class VideosDto(
     @SerializedName("results")
     val result: List<VideoDto>
 ) {
-    fun toVideos() = result.map { it.toVideo() }
+    fun toVideos() = result.map {
+        it.toVideo()
+    }
 }

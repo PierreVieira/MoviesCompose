@@ -5,9 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import com.example.moviescompose.navigation.NavigationComponent
+import com.example.moviescompose.ui.components.AppComponent
+import com.example.moviescompose.ui.components.BottomNavigationBar
 import com.example.moviescompose.ui.theme.MoviesComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,9 +22,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MoviesComposeTheme {
-                Surface(color = MaterialTheme.colors.background) {
-                    NavigationComponent(navController = rememberNavController())
-                }
+                AppComponent()
             }
         }
     }

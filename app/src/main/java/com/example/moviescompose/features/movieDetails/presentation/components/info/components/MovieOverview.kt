@@ -19,7 +19,7 @@ fun MovieOverview(
 ) {
     Column {
         SectionTitle(textId = R.string.overview)
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = modifier.height(8.dp))
         Text(
             text = overview,
             color = OverviewDescription

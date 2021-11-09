@@ -1,7 +1,7 @@
 package com.example.moviescompose.features.movieDetails.domain.model
 
 import com.example.moviescompose.features.home.domain.model.ReleaseDate
-import com.example.moviescompose.features.movieDetails.data.dataSource.dto.DatabaseMovieDetailsDto
+import com.example.moviescompose.features.movieDetails.data.dataSource.dto.EntityMovieDetailsDto
 import com.example.moviescompose.util.ApiConstants
 import com.example.moviescompose.util.Converters
 
@@ -14,12 +14,13 @@ data class MovieDetails(
     val score: Int,
     val backdropUrl: String?,
     val genres: List<Genre>,
-    val favorite: Boolean = false
+    val favorite: Boolean = false,
+    val movieVideo: MovieVideo? = null
 ) {
-    fun toDatabaseDto(): DatabaseMovieDetailsDto {
+    fun toDatabaseDto(): EntityMovieDetailsDto {
         val releaseDateString = "${releaseDate.year}-${releaseDate.month}-${releaseDate.day}"
         val genresJson = Converters.listToJson(genres.map { it.name })
-        return DatabaseMovieDetailsDto(
+        return EntityMovieDetailsDto(
             id = id,
             title = title,
             score = score,
@@ -28,7 +29,9 @@ data class MovieDetails(
             releaseDate = releaseDateString,
             genres = genresJson,
             posterPath = posterUrl?.removePrefix(ApiConstants.POSTER_BASE_URL),
-            backdropPath = backdropUrl?.removePrefix(ApiConstants.BACKDROP_BASE_URL)
+            backdropPath = backdropUrl?.removePrefix(ApiConstants.BACKDROP_BASE_URL),
+            youtubeVideoId = movieVideo?.id,
+            videoSite = movieVideo?.site
         )
     }
 }

@@ -6,6 +6,7 @@ import com.example.moviescompose.features.home.domain.model.Movie
 import com.example.moviescompose.features.home.domain.repository.MoviesListRepository
 import com.example.moviescompose.features.home.domain.util.ListMoviesType
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import okio.IOException
 import retrofit2.HttpException
@@ -16,14 +17,20 @@ class GetMoviesList @Inject constructor(
     private val repository: MoviesListRepository
 ) {
     operator fun invoke(type: ListMoviesType): Flow<Resource<List<Movie>>> = flow {
+        loadFromWeb(type)
+    }
+
+    private suspend fun FlowCollector<Resource<List<Movie>>>.loadFromWeb(
+        type: ListMoviesType
+    ) {
         try {
-            emit(Resource.Loading<List<Movie>>())
+            emit(Resource.Loading())
             val movies = repository.getListMoviesByType(type).toMovies()
-            emit(Resource.Success<List<Movie>>(movies))
+            emit(Resource.Success(movies))
         } catch (e: HttpException) {
-            emit(Resource.Error<List<Movie>>(e.localizedMessage ?: NetworkErrorMessages.UNEXPECTED))
+            emit(Resource.Error(e.localizedMessage ?: NetworkErrorMessages.UNEXPECTED))
         } catch (e: IOException) {
-            emit(Resource.Error<List<Movie>>(NetworkErrorMessages.SERVER))
+            emit(Resource.Error(NetworkErrorMessages.SERVER))
         }
     }
 }
