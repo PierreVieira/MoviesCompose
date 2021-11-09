@@ -13,7 +13,7 @@ Pensando nisso escolhi desenvolver uma aplicação de listagem de filmes com pos
 O app é dividido por feature, e cada feature contém 3 packages: 
 - Data: Contém tudo que seja de relevante para dados, como por exemplo o acesso a API e banco de dados;
 - Domain: Um tipo de camada de conexão, contém as nossas regras de negócio (divididas em use cases), como por exemplo a lógica de filtrar uma lista, definição de repositórios e modelo de classes (como entidades de bancos de dados);
-- Presentation contém a representação de UI: estados de carregamento, erro e demais componentes.
+- Presentation: Contém a representação de UI: estados de carregamento, erro e demais componentes.
 
 ## Como o app funciona hoje?
 1) Ao entrar no app a primeira tela a carregar será a home com 2 listas de filmes, contendo 20 filmes cada (40 no total);
