@@ -23,11 +23,12 @@ O app é dividido por feature, e cada feature contém 3 packages:
 3) Ao clicar no ícone de favoritos o filme poderá ser favoritado ou desfavoritado, caso seja favoritado o filme é salvo no banco de dados e fica disponível mesmo se o aparelho não estiver conectado à internet 😊
 
 ## E os testes? 🤔
-O app contém testes unitários e de interface, os testes unitários estão focados em fazer o teste do caso de uso para a obtenção dos dados, já o de interface irá fazer todos os fluxos de navegação possíveis garantindo que não esteja nada quebrado ✔
+- O app contém testes unitários e de interface ✔
+- Os testes unitários estão focados em fazer o teste do caso de uso para a obtenção dos dados, já o de interface irá fazer todos os fluxos de navegação possíveis garantindo que não esteja nada quebrado ✔
 
 ## O que vem pro futuro?
 - Buscar filme;
-- Filtrar a lista de favoritos baseado em dta de aedição, nome e etc;
+- Filtrar a lista de favoritos baseado em data de edição, nome e etc;
 - Login com firebase mantendo os filmes favoritos remotamente;
 - Integrar com a API internacionalizada para pegar os detalhes do filme em qualquer língua;
 - Modularizar o app por feature;
